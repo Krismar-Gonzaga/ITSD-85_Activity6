@@ -1,0 +1,14 @@
+services:
+web:
+build:
+context: .
+args:
+APP_VERSION: ${APP_VERSION:-dev}
+image: itsd85-app:${APP_VERSION:-dev}
+container_name: itsd85-app
+ports:
+- "8080:3000"
+restart: unless-stopped
+.gitignore and .dockerignore (same content for both):
+node_modules/
+.env
