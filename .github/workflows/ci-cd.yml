@@ -1,25 +1,31 @@
 name: CI-CD
+
 on:
-push:
-branches: [main]
-pull_request:
-branches: [main]
-workflow_dispatch: # adds a manual "Run workflow" button
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # adds a manual "Run workflow" button
+
 jobs:
-test:
-name: test
-runs-on: ubuntu-latest # free GitHub-hosted runner
-steps:
-- name: Get the code
-uses: actions/checkout@v7
-- name: Install Node.js 24
-uses: actions/setup-node@v7
-with:
-node-version: 24
-cache: npm
-- name: Install dependencies (exact versions from package-lock.json)
-run: npm ci
-- name: Lint
-run: npm run lint
-- name: Run tests
-run: npm test
+  test:
+    name: test
+    runs-on: ubuntu-latest # free GitHub-hosted runner
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v7
+
+      - name: Install Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies (exact versions from package-lock.json)
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
